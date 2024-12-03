@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Activity Logger</title>
+        <link rel="stylesheet" href="/static/styles.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Activity Logger</h1>
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+            {% if success %}
+            <p class="success">{{ success }}</p>
+            {% endif %}
+            <form method="POST">
+                <label for="time_interval">Time Interval:</label>
+                <select name="time_interval" id="time_interval" class="input">
+                    {% for slot in timeslots %}
+                    <option value="{{ slot }}" {% if slot == default_interval %}selected{% endif %}>
+                        {{ slot }}
+                    </option>
+                    {% endfor %}
+                </select>
+                <label for="description">What did you do?</label>
+                <input type="text" id="description" name="description" class="input" required>
+                <button type="submit" class="button">Submit</button>
+            </form>
+            <button class="button secondary" onclick="window.location.href='/logs'">View Logs</button>
+            <!-- Logout Button -->
+            <button class="button logout" onclick="window.location.href='/logout'">Logout</button>
+
+        </div>
+    </body>
+</html>

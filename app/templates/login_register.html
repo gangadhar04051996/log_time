@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Welcome to Activity Logger</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+            {% for category, message in messages %}
+                <p class="flash flash-{{ category }}">{{ message }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab('login')">Login</button>
+            <button class="tab-button" onclick="openTab('register')">Register</button>
+        </div>
+
+        <!-- Login Section -->
+        <div id="login" class="tab-content active">
+            <h2>Login</h2>
+            <form method="POST" action="/login">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input" required>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" class="input" required>
+                <button type="submit" class="button">Login</button>
+            </form>
+        </div>
+
+        <!-- Register Section -->
+        <div id="register" class="tab-content">
+            <h2>Register</h2>
+            <form method="POST" action="/register">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" class="input" required>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" class="input" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="input" required>
+                <button type="submit" class="button secondary">Register</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-button');
+
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`button[onclick="openTab('${tabName}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

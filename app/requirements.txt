@@ -1,0 +1,6 @@
+SQLAlchemy==1.4.23
+psycopg2-binary==2.9.1
+Flask==2.0.2
+werkzeug==2.0.1
+tenacity
+pytz

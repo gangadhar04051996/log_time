@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Logs</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ username }} Logs</h1>
+        <form method="GET" class="date-form">
+            <label for="log_date">Select Date:</label>
+            <input
+                type="date"
+                id="log_date"
+                name="log_date"
+                value="{{ selected_date }}"
+                class="input">
+            <button type="submit" class="button">View Logs</button>
+        </form>
+
+        {% if time_travel %}
+        <p class="no-logs">
+            {{ random_message }} <span class="emoji"></span>
+        </p>
+        {% elif logs %}
+        <ul class="log-list">
+            {% for log in logs %}
+            <li class="log-item">
+                <div class="log-time">{{ log.timestamp }} EST</div>
+                <div class="log-interval">{{ log.interval }}</div>
+                <div class="log-description">{{ log.description }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="no-logs">
+            {{ random_message }} <span class="emoji"></span>
+        </p>
+        {% endif %}
+        <button class="button secondary" onclick="window.location.href='/'">Go Back</button>
+    </div>
+</html>
